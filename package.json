@@ -2,18 +2,27 @@
   "name": "deployer",
   "version": "0.1.0",
   "private": true,
+  "main": "main.js",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "electron": "electron ."
   },
   "dependencies": {
+    "bulma": "^0.6.2",
+    "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "gulp-rsync": "0.0.8",
+    "simple-git": "^1.89.0",
+    "uuid": "^3.2.1",
     "vue": "^2.5.13"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.0.0-alpha.5",
     "@vue/cli-plugin-eslint": "^3.0.0-alpha.5",
     "@vue/cli-service": "^3.0.0-alpha.5",
+    "electron": "1.7.12",
     "vue-template-compiler": "^2.5.13"
   },
   "vue": {
