@@ -14,9 +14,7 @@
 					<span>{{ job.title }}</span>
 					<!-- <progress class="progress" value="90" max="100">90%</progress> -->
 				</div>
-				<div class="column">
-				</div>
-				<div class="column">
+				<div class="job-actions">
 					<div class="buttons is-right">
 						<span class="button" v-if="job.isLoading" v-html="time"></span>
 						<span class="button is-circle is-success" :class="{'is-loading': job.isLoading === true}" @click="deploy()">
@@ -270,17 +268,30 @@ export default {
 			vm.update()
 			axios.post(`${this.api}/build`, {job:this.job, server: this.server})
 				.then(function () {
-						vm.job.isLoading = false
-						vm.job.lastJobStatus = 'success'
-						clearInterval(vm.interval)
-						vm.update()
+						vm.done()
 				})
-				.catch(function () {
-						vm.job.lastJobStatus = 'error'
-						vm.job.isLoading = false
-						clearInterval(vm.interval)
-						vm.update()
+				.catch(function (err) {
+						vm.done(err)
 				});
+		},
+		done(err) {
+			this.job.isLoading = false
+			this.job.lastJobStatus = err ? 'error' : 'success'
+			clearInterval(this.interval)
+			this.update()
+
+			let title = 'Done!'
+			let message = `Job ${this.job.title} successfully finished!`
+
+			if(err) {
+				title = 'Errored!'
+				message = `Job ${this.job.title} erroed! See logs for more information`
+			}
+
+			let myNotification = new Notification(title, {
+				body: message
+			})
+			myNotification
 		},
 		updateCurrentTime: function() {
 			this.currentTime = Date.now();
@@ -300,10 +311,14 @@ export default {
 	height: 36px;
 }
 .last-job-status {
-	margin-bottom: 0;
+	margin-bottom: 0!important;
 	padding-bottom: 0;
 	height: 2px;
 	margin-top: 9px;
 	margin-right: 13px;
+}
+.job-actions {
+	margin-bottom: 0!important;
+	padding-top: 6px;
 }
 </style>
