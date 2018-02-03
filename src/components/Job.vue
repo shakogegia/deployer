@@ -77,6 +77,10 @@
 				</div>
 				
 				<div v-if="activeTab === 'source'">
+					<div class="notification">
+						<!-- <button class="delete"></button> -->
+						Deployer will use ssh to pull repository. You must configure ssh access manually
+					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
@@ -114,7 +118,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.source.repository" placeholder="Enter repositiry">
+											<input class="input" type="text" v-model="job.source.repository" placeholder="Enter repository">
 									</p>
 								</div>
 							</div>
