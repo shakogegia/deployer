@@ -21,9 +21,9 @@
     }
   },
   "author": {
-    "email" : "shalva.gegia@gmail.com",
-    "name" : "Shalva Gegia",
-    "url" : "http://gegia.me"
+    "email": "shalva.gegia@gmail.com",
+    "name": "Shalva Gegia",
+    "url": "http://gegia.me"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -38,8 +38,14 @@
     "@vue/cli-plugin-babel": "^3.0.0-alpha.5",
     "@vue/cli-plugin-eslint": "^3.0.0-alpha.5",
     "@vue/cli-service": "^3.0.0-alpha.5",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
     "electron": "1.7.12",
     "electron-builder": "^19.55.3",
+    "gulp": "^3.9.1",
+    "gulp-babel": "^7.0.1",
+    "gulp-run-command": "^0.0.9",
     "vue-template-compiler": "^2.5.13"
   },
   "vue": {
