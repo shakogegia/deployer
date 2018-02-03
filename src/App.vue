@@ -26,7 +26,7 @@
             <div class="column">
               <div class="buttons has-addons is-right">
                 <span class="button" :class="{'is-active': activeTab === 'jobs'}" @click="activeTab = 'jobs'">Jobs</span>
-                <span class="button" :class="{'is-active': activeTab === 'server'}" @click="activeTab = 'server'">Server</span>
+                <span class="button" :class="{'is-active': activeTab === 'server'}" @click="activeTab = 'server'">Server configuration</span>
               </div>
             </div>
           </div>

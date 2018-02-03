@@ -137,6 +137,10 @@
 				</div>
 				
 				<div v-if="activeTab === 'build'">
+					<div class="notification is-warning">
+						<button class="delete"></button>
+						Coming soon.
+					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
@@ -166,6 +170,10 @@
 				</div>
 				
 				<div v-if="activeTab === 'post'">
+					<div class="notification is-warning">
+						<button class="delete"></button>
+						Coming soon.
+					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">

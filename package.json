@@ -1,14 +1,29 @@
 {
-  "name": "deployer",
+  "name": "Deployer",
   "version": "0.1.0",
+  "description": "Deploye your apps painlesslly",
   "private": true,
-  "main": "main.js",
+  "main": "./main.js",
   "scripts": {
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "server": "nodemon server/app.js",
-    "electron": "electron ."
+    "electron": "electron .",
+    "pack": "electron-builder --output=app",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "me.gegia.deployer",
+    "mac": {
+      "category": "your.app.category.type",
+      "icon": "./icon.png"
+    }
+  },
+  "author": {
+    "email" : "shalva.gegia@gmail.com",
+    "name" : "Shalva Gegia",
+    "url" : "http://gegia.me"
   },
   "dependencies": {
     "axios": "^0.17.1",
@@ -24,6 +39,7 @@
     "@vue/cli-plugin-eslint": "^3.0.0-alpha.5",
     "@vue/cli-service": "^3.0.0-alpha.5",
     "electron": "1.7.12",
+    "electron-builder": "^19.55.3",
     "vue-template-compiler": "^2.5.13"
   },
   "vue": {

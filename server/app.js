@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
 
 // app.set('views', __dirname + '/client/views');
-app.use(express.static( path.join(__dirname, '../dist') ))
+app.use(express.static( path.join(__dirname, '../app') ))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -22,8 +22,8 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (request, response) => {
-    // response.sendFile('../dist/index.html', {root: __dirname })
-    response.sendFile(path.join(__dirname, '../dist/index.html'))
+    // response.sendFile('../app/index.html', {root: __dirname })
+    response.sendFile(path.join(__dirname, '../app/index.html'))
 })
 
 app.post('/build', (request, response) => {
