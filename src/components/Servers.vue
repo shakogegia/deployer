@@ -7,11 +7,11 @@
 							<div class="column"  @click="activate(server)">
 								<span class="icon"><i class="fa fa-desktop"></i></span>
 								<span>{{ server.title }}</span>
+							<!-- </div>
+							<div class="column"> -->
 							</div>
-							<div class="column">
-								<div class="has-text-right">
-									<span @click="remove(server)" class="icon"><i class="far fa-times-circle"></i></span>
-								</div>
+							<div class="has-text-right delete-container">
+								<span @click="remove(server)" class="icon"><i class="far fa-times-circle"></i></span>
 							</div>
 						</div>
 					</a>
@@ -42,5 +42,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.delete-container {
+	padding: 12px 5px;
+}
 </style>

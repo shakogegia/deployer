@@ -1,67 +1,42 @@
 const path = require('path')
 const fs = require('fs')
 const gitP = require('simple-git/promise');
-const gulp = require('gulp')
-const rsync = require('gulp-rsync')
+const Rsync = require('rsync');
+
 
 class Builder {
-    constructor(data) {
-        this.rsyncConf = {
-            progress: true,
-            incremental: true,
-            relative: true,
-            emptyDirectories: true,
-            recursive: true,
-            syncDest: true,
-            // clean: true,
-            hostname: '',
-            username: '',
-            destination: '',
-            exclude: [
-               // 'EXLUDED_FOLDERS'
-              './node_modules',
-              '.notes',
-              '.vscode',
-              'bot.log'
-            ]
+    constructor(job, server) {
+        
+        this.config = {
+            job: job,
+            server: server,
+            workingDirectory: path.join(__dirname, `../repos/${job.source.service}_${job.source.username}`),
+            localRepoPath: path.join(__dirname, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
+            remoteUrl: `https://${job.source.username}@github.com/${job.source.username}/${job.source.repository}`
         }
-
-        this.config = data
-
-        this.workingDirectory = null
-        this.localRepoPath = null
-
-        this.workingDirectory = path.join(__dirname, `../repos/${data.gitProvider}_${data.gitUser}`)
-        this.localRepoPath = path.join(this.workingDirectory, `/${data.gitRepository}`)
-
-        this.rsyncPaths = [ this.localRepoPath ]
-
-        this.remoteUrl = 'https://shakogegia:shakogegia@github.com/shakogegia/vue.js-georgian-keyboard'
-
+        
         this.checkWorkingDirectoryPath()
 
-        this.git = gitP(this.workingDirectory);
-
-        // this.syncLocalDirToServer = this.syncLocalDirToServer().bind(this)
+        this.git = gitP(this.config.workingDirectory);
     }
 
     checkWorkingDirectoryPath() {
-        if (!fs.existsSync(this.workingDirectory)) {
-            fs.mkdirSync(this.workingDirectory)
+        if (!fs.existsSync(this.config.workingDirectory)) {
+            fs.mkdirSync(this.config.workingDirectory)
         }   
     }
     
     getLocalRepositoryPath() {
-        return fs.existsSync(this.localRepoPath)
+        return fs.existsSync(this.config.localRepoPath)
     }
 
 
     clone(){
-        return this.git.clone(this.remoteUrl)
+        return this.git.clone(this.config.remoteUrl)
     }
     
     pull(){
-        this.git = gitP(this.localRepoPath);
+        this.git = gitP(this.config.localRepoPath);
         return this.git.pull()
     }
 
@@ -73,26 +48,32 @@ class Builder {
         }
     }
 
-    syncLocalDirToServer(rsyncdPaths, rsyncConf) {
-        console.log("rsyncdPaths")
+    syncLocalDirToServer(config) {
         return new Promise(function(resolve, reject) {
-            // resolve()
-            // gulp.src(rsyncdPaths)
-            //     .pipe(rsync(rsyncConf))
-            //     .on('end', resolve)
-            //     .on('error', reject)
+            const rsync = new Rsync()
+                .shell('ssh')
+                .flags('az')
+                .source(config.localRepoPath)
+                .destination(`${config.server.username}@${config.server.host}:${config.job.directory}`);
+
+            // Execute the command
+            rsync.execute(function(err, code, cmd) {
+                if(err) {
+                    return reject({err, code, cmd})
+                }
+                resolve('s')
+            });
         })
     }
 
     deploy() {
-        const syncLocalDirToServer = this.syncLocalDirToServer(this.rsyncdPaths, this.rsyncConf)
         return new Promise((resolve, reject) => {
-            
             this.createOrUpdateLocalRepo()
-                // .syncLocalDirToServer()
-                .then(() => resolve())
-                .catch(err => reject)
-
+                .then(() => {
+                    return this.syncLocalDirToServer(this.config)
+                })
+                .then((s) => resolve(s))
+                .catch(err => reject(err))
         })
     }
 }

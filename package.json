@@ -7,13 +7,14 @@
     "serve": "vue-cli-service serve --open",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
+    "server": "nodemon server/app.js",
     "electron": "electron ."
   },
   "dependencies": {
+    "axios": "^0.17.1",
     "bulma": "^0.6.2",
     "express": "^4.16.2",
-    "gulp": "^3.9.1",
-    "gulp-rsync": "0.0.8",
+    "rsync": "^0.6.1",
     "simple-git": "^1.89.0",
     "uuid": "^3.2.1",
     "vue": "^2.5.13"

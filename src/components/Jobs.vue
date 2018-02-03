@@ -8,7 +8,7 @@
 		</div>
 
 		<div class="job-container" v-for="(job, i) in server.jobs" :key="i">
-			<job :job="job" @remove="remove(job, $event)" @update="updateJob(job, $event)"></job>
+			<job :job="job" :server="server" @remove="remove(job, $event)" @update="updateJob(job, $event)"></job>
 		</div>
 
   </div>
@@ -42,8 +42,12 @@ export default {
 			}
 			this.server.jobs.push({
 				id: uuidv1(new Date()),
+				title: `New Job ${this.server.jobs.length+1}`,
 				collapse: true,
-				title: `New Job ${this.server.jobs.length+1}`
+				isLoading: false,
+				source: {
+					branch: 'master'
+				},
 			})
 			this.update(this.server)
 		},
