@@ -4,7 +4,7 @@
 </p>
 <p align="center">
 Simple deployment tool, that works. <br />
-Deploy your apps painlesslly with GUI, no more vim's and ssh clients
+Deploy your apps painlessly with GUI, no more vim's and ssh clients
 </p>
 
 
