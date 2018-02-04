@@ -11,16 +11,24 @@ class Builder {
         this.config = {
             job: job,
             server: server,
-            workingDirectory: path.join(__dirname, `../repos/${job.source.service}_${job.source.username}`),
-            localRepoPath: path.join(__dirname, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
+            reposDirectory: path.join(global.appPath, `../repos/`),
+            workingDirectory: path.join(global.appPath, `../repos/${job.source.service}_${job.source.username}`),
+            localRepoPath: path.join(global.appPath, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
             remoteUrl: `https://${job.source.username}@github.com/${job.source.username}/${job.source.repository}`
         }
         
+        this.checkReposPath()
         this.checkWorkingDirectoryPath()
 
         this.git = gitP(this.config.workingDirectory);
     }
 
+    checkReposPath() {
+        if (!fs.existsSync(this.config.reposDirectory)) {
+            fs.mkdirSync(this.config.reposDirectory)
+        }   
+    }
+    
     checkWorkingDirectoryPath() {
         if (!fs.existsSync(this.config.workingDirectory)) {
             fs.mkdirSync(this.config.workingDirectory)
@@ -60,7 +68,7 @@ class Builder {
             // See: https://api.slack.com/methods/chat.postMessage
             const now = moment().format('DD-MM-YYYY HH:mm:ss')
             const message = err ? `Job ${config.job.title} errored!` : `Job ${config.job.title} successfully executed!`
-            const icon = path.join(__dirname, '../app/icon.png')
+            const icon = path.join(global.appPath, '../app/icon.png')
             const options = {
                 attachments: [
                   {
