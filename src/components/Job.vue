@@ -149,7 +149,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.directory" placeholder="Enter build directory: /home/default/project">
+											<input class="input" type="text" v-model="job.directory" disabled placeholder="Enter build directory: /home/default/project">
 									</p>
 								</div>
 							</div>
@@ -161,7 +161,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-										<textarea class="textarea" v-model="job.buildCommand" placeholder="Enter command like: npm install && pm2 reload all"></textarea>
+										<textarea class="textarea" v-model="job.buildCommand" disabled placeholder="Enter command like: npm install && pm2 reload all"></textarea>
 									</p>
 								</div>
 							</div>
@@ -172,7 +172,7 @@
 				<div v-if="activeTab === 'post'">
 					<div class="notification is-warning">
 						<button class="delete"></button>
-						Coming soon.
+						This feature is in progress yet.
 					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
@@ -182,7 +182,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.slackToken" placeholder="Enter slack token">
+											<input class="input" type="text" v-model="job.slack.token" placeholder="Enter slack token">
 									</p>
 								</div>
 							</div>
@@ -194,19 +194,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.slackChannel" placeholder="Enter slack channel">
-									</p>
-								</div>
-							</div>
-						</div>
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label">Slack Message</label>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control">
-										<textarea class="textarea" v-model="job.slackMessage" placeholder="Enter slack message"></textarea>
+										<input class="input" type="text" v-model="job.slack.channel" placeholder="Enter slack channel">
 									</p>
 								</div>
 							</div>
@@ -293,7 +281,7 @@ export default {
 
 			if(err) {
 				title = 'Errored!'
-				message = `Job ${this.job.title} erroed! See logs for more information`
+				message = `Job ${this.job.title} errored! See logs for more information`
 			}
 
 			let myNotification = new Notification(title, {

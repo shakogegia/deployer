@@ -26,9 +26,12 @@
     "url": "http://gegia.me"
   },
   "dependencies": {
+    "@slack/client": "^3.16.0",
     "axios": "^0.17.1",
     "bulma": "^0.6.2",
     "express": "^4.16.2",
+    "moment": "^2.20.1",
+    "npm": "^5.6.0",
     "rsync": "^0.6.1",
     "simple-git": "^1.89.0",
     "uuid": "^3.2.1",

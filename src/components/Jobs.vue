@@ -48,6 +48,9 @@ export default {
 				source: {
 					branch: 'master'
 				},
+				slack: {
+					token: ''
+				},
 			})
 			this.update(this.server)
 		},

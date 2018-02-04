@@ -5,9 +5,11 @@ gulp.task('cleanapp', run('rm -rf app '))
 gulp.task('cleandist', run('rm -rf dist '))
 gulp.task('vue', run('npm run build'))
 gulp.task('appvue', () => {
-  gulp.src(['dist/**/*']).pipe(gulp.dest('app'));
+  gulp.src(['dist/**/*', './icon.png']).pipe(gulp.dest('app'));
 })
 
-gulp.task('build', ['cleanapp', 'appvue', 'cleandist'], run('yarn dist', {
+gulp.task('prepare', ['cleanapp', 'appvue'])
+
+gulp.task('build', ['appvue', 'cleandist'], run('yarn dist', {
   env: { NODE_ENV: 'production' }
 }))
