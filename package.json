@@ -1,6 +1,6 @@
 {
   "name": "Deployer",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Deploye your apps painlesslly",
   "private": true,
   "main": "./main.js",

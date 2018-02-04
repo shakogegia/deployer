@@ -37,6 +37,8 @@ npm run server
 ### Packaging and Distribution
     TODO
 
+### Credits
+App logo - [David Robertson](https://www.iconfinder.com/hooktraffic)
 
 ### Contribution
 Contributions are more than
