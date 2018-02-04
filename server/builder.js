@@ -68,7 +68,7 @@ class Builder {
                     "color": err ? "#eb1515" : "#36a64f",
                     "author_icon": icon,
                     "title": `Job status update - ${now}`,
-                    "text": message,
+                    "text": err ? err : message,
                     "image_url": icon,
                     "thumb_url": icon,
                     "footer": "Deployer",
