@@ -1,11 +1,16 @@
-# Deployer
-<p align="center">
-    <img src="./icon.png" width="100">
-</p>
-<p align="center">
-Simple deployment tool, that works. <br />
-Deploy your apps painlessly with GUI, no more vim's and ssh clients
-</p>
+<h1 align="center">
+  <br>
+  <a href="#"><img src="./icon.png" alt="WebTorrent" width="200"></a>
+  <br>
+  Deployer
+  <br>
+  <br>
+</h1>
+
+<h4 align="center">Simple deployment tool, that works. <br />
+Deploy your apps painlessly with GUI, no more vim's and ssh clients</h4>
+<br />
+
 
 
 ### Screenshot
@@ -42,3 +47,8 @@ App logo - [David Robertson](https://www.iconfinder.com/hooktraffic)
 
 ### Contribution
 Contributions are more than
+
+
+### License
+
+MIT. Copyright (c) [Shalva Gegia](http://gegia.me).
