@@ -3,13 +3,14 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
 const path = require('path')
-const fs = require('fs')
-const gitP = require('simple-git/promise');
+const Datastore = require('nedb')
+const db = new Datastore({ filename: path.join(__dirname, './database.db'), autoload: true });
+
 
 const Builder = require("./builder")
 
-app.use(bodyParser.urlencoded());
-app.use(bodyParser.json());
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 
 // app.set('views', __dirname + '/client/views');
 app.use(express.static( path.join(__dirname, '../app') ))
@@ -39,9 +40,27 @@ app.post('/build', (request, response) => {
         .catch((err) => {
             response.status(500).send({
                 message: 'Something broke!',
-                err
+                err: err.message || err
             })
         })
+})
+
+app.post('/db', (request, response) => {
+    let data = {
+        name: 'SERVERS',
+        id: 1,
+        data: request.body.data
+    }
+    db.update({ id: 1 }, data, {upsert: true}, function (err, numReplaced) {
+        response.send(data)
+    });
+})
+
+app.get('/db', (request, response) => {
+    db.findOne({ id: 1 }, function (err, doc) {
+        const servers = doc ? doc.data : []
+        response.send({servers:  servers})
+    });
 })
 
 

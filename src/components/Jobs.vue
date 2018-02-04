@@ -51,6 +51,7 @@ export default {
 				slack: {
 					token: ''
 				},
+				logs: []
 			})
 			this.update(this.server)
 		},

@@ -7,20 +7,20 @@ const { WebClient } = require('@slack/client');
 
 class Builder {
     constructor(job, server) {
-        
+        const DIR = global.appPath || __dirname
         this.config = {
             job: job,
             server: server,
-            reposDirectory: path.join(global.appPath, `../repos/`),
-            workingDirectory: path.join(global.appPath, `../repos/${job.source.service}_${job.source.username}`),
-            localRepoPath: path.join(global.appPath, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
+            reposDirectory: path.join(DIR, `../repos/`),
+            workingDirectory: path.join(DIR, `../repos/${job.source.service}_${job.source.username}`),
+            localRepoPath: path.join(DIR, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
             remoteUrl: `https://${job.source.username}@github.com/${job.source.username}/${job.source.repository}`
         }
         
         this.checkReposPath()
         this.checkWorkingDirectoryPath()
 
-        this.git = gitP(this.config.workingDirectory);
+        this.git = gitP(this.config.workingDirectory).silent(true);
     }
 
     checkReposPath() {
@@ -68,7 +68,8 @@ class Builder {
             // See: https://api.slack.com/methods/chat.postMessage
             const now = moment().format('DD-MM-YYYY HH:mm:ss')
             const message = err ? `Job ${config.job.title} errored!` : `Job ${config.job.title} successfully executed!`
-            const icon = path.join(global.appPath, '../app/icon.png')
+            const DIR = global.appPath || __dirname
+            const icon = path.join(DIR, '../app/icon.png')
             const options = {
                 attachments: [
                   {

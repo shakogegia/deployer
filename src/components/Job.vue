@@ -17,10 +17,10 @@
 				<div class="job-actions">
 					<div class="buttons is-right">
 						<span class="button" v-if="job.isLoading" v-html="time"></span>
-						<span class="button is-circle is-success" :class="{'is-loading': job.isLoading === true}" @click="deploy()">
+						<span class="button is-circle is-success" :class="{'is-loading': job.isLoading === true}" :disabled="disabled" @click="deploy()">
 							<i class="fas fa-play" aria-hidden="true"></i>
 						</span>
-						<span class="button is-circle is-primary">
+						<span class="button is-circle is-primary" @click="showLogs=true">
 							<i class="fas fa-list" aria-hidden="true"></i>
 						</span>
 						<span class="button is-circle is-danger" @click="remove()">
@@ -139,7 +139,7 @@
 				<div v-if="activeTab === 'build'">
 					<div class="notification is-warning">
 						<button class="delete"></button>
-						Coming soon.
+						This feature is not yet fully completed
 					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
@@ -149,7 +149,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.directory" disabled placeholder="Enter build directory: /home/default/project">
+											<input class="input" type="text" v-model="job.directory" placeholder="Enter build directory: /home/default/project">
 									</p>
 								</div>
 							</div>
@@ -170,10 +170,6 @@
 				</div>
 				
 				<div v-if="activeTab === 'post'">
-					<div class="notification is-warning">
-						<button class="delete"></button>
-						This feature is in progress yet.
-					</div>
 					<form v-on:submit.prevent="update">
 						<div class="field is-horizontal">
 							<div class="field-label is-normal">
@@ -204,14 +200,21 @@
 
 			</div>
     </div>
+		
+		<modal :opened="showLogs" :job="job" @close="closeModal($event)"></modal>
+
 	</div>
 </template>
 
 <script>
 import axios from 'axios'
+import Modal from './Modal.vue'
 
 export default {
-  name: 'job',
+	name: 'job',
+	components: {
+		Modal
+	},
   props: {
 		job: Object,
 		server: Object
@@ -222,7 +225,8 @@ export default {
 			api: 'http://localhost:3000',
 			startTime: null,
 			currentTime: null,
-			interval: null
+			interval: null,
+			showLogs: false
 		}
 	},
 	computed: {
@@ -241,6 +245,16 @@ export default {
 				var lapsed = this.milliseconds;
 				var sec = Math.ceil((lapsed / 1000) % 60);
 				return sec >= 10 ? sec : '0' + sec;
+		},
+		disabled(){
+			return !(this.job.source
+			&& this.job.source.repository
+			&& this.job.source.username
+			&& this.job.source.service
+			&& this.job.source.service
+			&& this.server.host
+			&& this.server.username
+			)
 		}
 	},
 	methods: {
@@ -274,7 +288,7 @@ export default {
 			this.job.isLoading = false
 			this.job.lastJobStatus = err ? 'error' : 'success'
 			clearInterval(this.interval)
-			this.update()
+
 
 			let title = 'Done!'
 			let message = `Job ${this.job.title} successfully finished!`
@@ -284,6 +298,21 @@ export default {
 				message = `Job ${this.job.title} errored! See logs for more information`
 			}
 
+
+			const log = {
+				date: new Date(),
+				result: err ? 'error' : 'success',
+				stack: null, // err
+			}
+			
+			if(!this.job.logs) {
+				this.job.logs = []
+			}
+
+			this.job.logs.push(log)
+
+			this.update()
+
 			let myNotification = new Notification(title, {
 				body: message
 			})
@@ -291,6 +320,9 @@ export default {
 		},
 		updateCurrentTime: function() {
 			this.currentTime = Date.now();
+		},
+		closeModal() {
+			this.showLogs = false
 		}
 	},
 	mounted() {

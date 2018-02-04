@@ -56,6 +56,7 @@ import Servers from './components/Servers.vue'
 import Server from './components/Server'
 import Jobs from './components/Jobs'
 import uuidv1 from 'uuid/v1'
+import axios from 'axios'
 
 export default {
   name: 'app',
@@ -68,15 +69,23 @@ export default {
     return {
       servers: [],
       server: {},
-      activeTab: "jobs"
+      activeTab: "jobs",
+      api: "http://localhost:3000",
     }
   },
   methods: {
     store(key, val) {
-      localStorage.setItem(key, JSON.stringify(val));
+      axios.post(`${this.api}/db`, {data: val})
     },
-    fetch(key) {
-      return JSON.parse(localStorage.getItem(key));
+    fetch() {
+      const vm = this
+      axios.get(`${this.api}/db`)
+        .then(function(response) {
+					vm.servers = response.data.servers
+				})
+				.catch(function (err) {
+					alert('Error with connecting server:', err)
+				});
     },
     activate(e, server) {
       this.server = server
@@ -106,7 +115,7 @@ export default {
     },
   },
   mounted() {
-    this.servers = this.fetch('servers') || []
+    this.fetch('servers')
     if(this.servers.length) {
       this.server = this.servers[0]
     }
