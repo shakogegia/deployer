@@ -3,9 +3,8 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
 const path = require('path')
-const Datastore = require('nedb')
-const db = new Datastore({ filename: path.join(__dirname, './database.db'), autoload: true });
-
+const Store = require('electron-store');
+const store = new Store();
 
 const Builder = require("./builder")
 
@@ -46,29 +45,20 @@ app.post('/build', (request, response) => {
 })
 
 app.post('/db', (request, response) => {
-    let data = {
-        name: 'SERVERS',
-        id: 1,
-        data: request.body.data
-    }
-    db.update({ id: 1 }, data, {upsert: true}, function (err, numReplaced) {
-        response.send(data)
-    });
+    store.set('servers', request.body.data);
+    response.send({})
 })
 
 app.get('/db', (request, response) => {
-    db.findOne({ id: 1 }, function (err, doc) {
-        const servers = doc ? doc.data : []
-        response.send({servers:  servers})
-    });
+    const servers = store.get('servers') || [];  
+    response.send({servers:  servers})
 })
 
 
 
 app.listen(port, (err) => {
-    if (err) {
+    if (err)
         return console.log('something bad happened', err)
-    }
 
     console.log(`server is listening on ${port}`)
 })

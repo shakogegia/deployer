@@ -1,6 +1,6 @@
 {
   "name": "Deployer",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "description": "Deploye your apps painlesslly",
   "private": true,
   "main": "./main.js",
@@ -30,6 +30,7 @@
     "axios": "^0.17.1",
     "bulma": "^0.6.2",
     "electron-debug": "^1.5.0",
+    "electron-store": "^1.3.0",
     "express": "^4.16.2",
     "moment": "^2.20.1",
     "nedb": "^1.8.0",

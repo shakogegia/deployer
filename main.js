@@ -1,20 +1,18 @@
 const electron = require('electron')
-// Module to control application life.
 const app = electron.app
-// Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 const Menu = electron.Menu;
 
-
 const path = require('path')
 const url = require('url')
+
+global.appPath = app.getAppPath()
+global.app = app
 
 const express = require('./server/app');
 
 // Enable DevTools
 // require('electron-debug')({showDevTools: false});
-
-global.appPath = app.getAppPath()
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
