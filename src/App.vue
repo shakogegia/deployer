@@ -48,6 +48,8 @@
       </div>
       
     </section>
+
+    <update :opened="showUpdateModal" @close="closeUpdateModal($event)" :currentVersion="currentVersion" :latestVersion="latestVersion"></update>
   </div>
 </template>
 
@@ -55,6 +57,7 @@
 import Servers from './components/Servers.vue'
 import Server from './components/Server'
 import Jobs from './components/Jobs'
+import Update from './components/Update'
 import uuidv1 from 'uuid/v1'
 import axios from 'axios'
 
@@ -64,6 +67,7 @@ export default {
     Servers,
     Server,
     Jobs,
+    Update,
   },
   data() {
     return {
@@ -71,6 +75,9 @@ export default {
       server: {},
       activeTab: "jobs",
       api: "http://localhost:3000",
+      currentVersion: null,
+      latestVersion: null,
+      showUpdateModal: false,
     }
   },
   methods: {
@@ -113,12 +120,35 @@ export default {
       this.server = this.servers.filter(item => item.id === id)[0]
       this.activeTab = 'server'
     },
+    closeUpdateModal() {
+      this.showUpdateModal = false
+    },
+    checkVersion() {
+      const vm = this
+      axios.get(`${this.api}/currentVersion`)
+        .then(function(response) {
+          if(response.data.version) {
+            const currentVersion = response.data.version
+            vm.currentVersion = currentVersion
+             axios.get(`https://api.github.com/repos/shakogegia/deployer/releases`)
+                  .then(function(response) {
+                    if(response.data[0].tag_name !== currentVersion) {
+                      vm.latestVersion = response.data[0].tag_name
+                      vm.showUpdateModal = true
+                    }
+                  });
+                        
+          }
+				});
+    },
   },
   mounted() {
     this.fetch('servers')
     if(this.servers.length) {
       this.server = this.servers[0]
     }
+
+    this.checkVersion()
   }
 }
 </script>

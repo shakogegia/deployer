@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const bodyParser = require('body-parser');
 const path = require('path')
+const fs = require('fs')
 const Store = require('electron-store');
 const store = new Store();
 
@@ -52,6 +53,11 @@ app.post('/db', (request, response) => {
 app.get('/db', (request, response) => {
     const servers = store.get('servers') || [];  
     response.send({servers:  servers})
+})
+
+app.get('/currentVersion', (request, response) => {
+    const DIR = global.appPath || __dirname
+    response.send(JSON.parse(fs.readFileSync(path.join(DIR, './package.json'))))
 })
 
 
