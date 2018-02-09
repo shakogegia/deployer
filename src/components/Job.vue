@@ -337,6 +337,11 @@ export default {
 		},
 		suggestRepos() {
 			this.repositories = []
+			
+			if(this.job.source.service !== 'github.com') {
+				return
+			}
+
 			const vm = this
 			axios.get(`https://api.github.com/users/${this.job.source.username}/repos`)
 				.then(function (response) {
