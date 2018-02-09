@@ -104,7 +104,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.source.username" placeholder="Enter username">
+										<input class="input" type="text" v-model="job.source.username" @keyup="suggestRepos()" placeholder="Enter username">
 									</p>
 								</div>
 							</div>
@@ -115,9 +115,19 @@
 							</div>
 							<div class="field-body">
 								<div class="field">
-									<p class="control">
+									<p class="control is-expanded">
 											<input class="input" type="text" v-model="job.source.repository" placeholder="Enter repository">
 									</p>
+								</div>
+								<div class="field">
+									<div class="control is-expanded">
+										<div class="select">
+											<select v-model="job.source.repository" :disabled="!repositories.length">
+												<option value="" selected disabled>Choose one:</option>
+												<option :value="repo.name" v-for="(repo, i) in repositories" :key="i">{{ repo.name }}</option>
+											</select>
+										</div>
+									</div>
 								</div>
 							</div>
 						</div>
@@ -178,7 +188,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-											<input class="input" type="text" v-model="job.slack.token" placeholder="Enter slack token">
+											<input class="input" type="text" v-model="job.slack.token" placeholder="Enter slack token: xoxp-111111111-22222222....">
 									</p>
 								</div>
 							</div>
@@ -190,7 +200,7 @@
 							<div class="field-body">
 								<div class="field">
 									<p class="control">
-										<input class="input" type="text" v-model="job.slack.channel" placeholder="Enter slack channel">
+										<input class="input" type="text" v-model="job.slack.channel" placeholder="Enter slack channel ID Ex: C11111111">
 									</p>
 								</div>
 							</div>
@@ -226,7 +236,8 @@ export default {
 			startTime: null,
 			currentTime: null,
 			interval: null,
-			showLogs: false
+			showLogs: false,
+			repositories: []
 		}
 	},
 	computed: {
@@ -323,6 +334,17 @@ export default {
 		},
 		closeModal() {
 			this.showLogs = false
+		},
+		suggestRepos() {
+			this.repositories = []
+			const vm = this
+			axios.get(`https://api.github.com/users/${this.job.source.username}/repos`)
+				.then(function (response) {
+					vm.repositories = response.data
+				})
+				.catch(function (err) {
+					vm.done(err)
+				});
 		}
 	},
 	mounted() {
