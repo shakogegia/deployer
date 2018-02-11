@@ -14,7 +14,7 @@ class Builder {
             reposDirectory: path.join(DIR, `../repos/`),
             workingDirectory: path.join(DIR, `../repos/${job.source.service}_${job.source.username}`),
             localRepoPath: path.join(DIR, `../repos/${job.source.service}_${job.source.username}/${job.source.repository}`),
-            remoteUrl: `https://${job.source.username}@github.com/${job.source.username}/${job.source.repository}`
+            remoteUrl: `https://${job.source.username}@${job.source.service}/${job.source.username}/${job.source.repository}`
         }
         
         this.checkReposPath()
