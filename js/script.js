@@ -85,6 +85,7 @@ $(function() {
             items: 1,
             nav: true,
             dots: false,
+            itemsDesktop : [1199,10],
             navText: ['<span class="ti-arrow-left"></span>', '<span class="ti-arrow-right"></span>']
         });
     }

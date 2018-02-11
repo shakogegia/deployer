@@ -68,6 +68,12 @@
         </div>
     </div> -->
 
+    <div class="client-logos my-5">
+        <div class="container text-center">
+            <p>Sometimes you have a side project and you need simple solution to deploy your changes. There are some deployment services you can pay and will get great service, but for side project, which doesn't have income, it's not an option. Also sometimes your lazy and dont to TDD and want just deploy new version. Thats where Deployer shines. No more SSH-into-server and manually doing updates. Just click play button and your app is ready  to go!</p>
+        </div>
+    </div>
+
     <div class="section light-bg" id="features">
 
 
@@ -151,7 +157,7 @@
         <div class="container">
             <div class="section-title">
                 <small>FEATURES</small>
-                <h3>Do more with our app</h3>
+                <h3>Do more with Deployer</h3>
             </div>
 
             <ul class="nav nav-tabs nav-justified" role="tablist">
@@ -171,63 +177,50 @@
             <div class="tab-content">
                 <div class="tab-pane fade show active" id="communication">
                     <div class="d-flex flex-column flex-lg-row">
-                        <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <!-- <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0"> -->
+                        <span class="ti-server gradient-fill ti-5x align-self-center mr-lg-5 mb-5 mb-lg-0"></span>
                         <div>
-
                             <h2>Configure your servers</h2>
                             <p class="lead">Add you server credentials. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
+                            <p> Add your server configuration: Hostname and Username. Deployer will use SSH to connect your servers. You must configure SSH key manually
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="schedule">
                     <div class="d-flex flex-column flex-lg-row">
+                        <span class="ti-github gradient-fill ti-5x align-self-center mr-lg-5 mb-5 mb-lg-0"></span>
                         <div>
                             <h2>Choose deployement source</h2>
                             <p class="lead">Enter your repository details. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
+                            <p>Choose your git provider: Github or Bitbucket, enter your username and choose repository. . Deployer will use SSH to pull your repository. You must configure SSH access manually
                             </p>
                         </div>
-                        <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <!-- <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0"> -->
                     </div>
                 </div>
                 <div class="tab-pane fade" id="messages">
                     <div class="d-flex flex-column flex-lg-row">
-                        <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <!-- <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0"> -->
+                        <span class="ti-rocket gradient-fill ti-5x align-self-center mr-lg-5 mb-5 mb-lg-0"></span>
                         <div>
                             <h2>Add build options</h2>
                             <p class="lead">Customize your build options </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
+                            <p>Enter your build directory on server. Sometimes you want to run command after uodating files on your server, like: <code>npm install</code>, <code>pm2 reload all</code>, <code>php artisan migrate</code> or something like that.
                             </p>
                         </div>
                     </div>
                 </div>
                 <div class="tab-pane fade" id="livechat">
                     <div class="d-flex flex-column flex-lg-row">
+                        <span class="ti-alert gradient-fill ti-5x align-self-center mr-lg-5 mb-5 mb-lg-0"></span>
                         <div>
                             <h2>Get notified</h2>
                             <p class="lead">Deployer will notify you. </p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. Ut placerat dui eu nulla
-                                congue tincidunt ac a nibh. Mauris accumsan pulvinar lorem placerat volutpat. Praesent quis facilisis elit. Sed condimentum neque quis ex porttitor,
-                            </p>
-                            <p> malesuada faucibus augue aliquet. Sed elit est, eleifend sed dapibus a, semper a eros. Vestibulum blandit vulputate pharetra. Phasellus lobortis leo a nisl euismod, eu faucibus justo sollicitudin. Mauris consectetur, tortor
-                                sed tempor malesuada, sem nunc porta augue, in dictum arcu tortor id turpis. Proin aliquet vulputate aliquam.
+                            <p>After build completed, Deployer will let you know job build status. Also you can enter your slack token and slack channel id and Deployer will send message to slack channel.
                             </p>
                         </div>
-                        <img src="images/graphic.png" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0">
+                        <!-- <img src="images/notifications.png" width="270" alt="graphic" class="img-fluid rounded align-self-start mr-lg-5 mb-5 mb-lg-0"> -->
                     </div>
                 </div>
             </div>
@@ -289,7 +282,7 @@
                     </ul>
                 </div>
                 <div class="col-md-4">
-                    <img src="images/iphonex.png" alt="iphone" class="img-fluid">
+                    <img src="https://raw.githubusercontent.com/shakogegia/deployer/master/icon.png" alt="logo" class="img-fluid">
                 </div>
 
             </div>
@@ -342,10 +335,11 @@
             </div>
 
             <div class="img-gallery owl-carousel owl-theme">
-                <img src="images/screen1.jpg" alt="image">
-                <img src="images/screen2.jpg" alt="image">
-                <img src="images/screen3.jpg" alt="image">
-                <img src="images/screen1.jpg" alt="image">
+                <!-- <img src="images/screen1.jpg" alt="image"> -->
+                <img src="https://raw.githubusercontent.com/shakogegia/deployer/master/screenshots/demo.png" alt="image">
+                <img src="images/screen1.png" alt="image">
+                <img src="images/screen2.png" alt="image">
+                <img src="images/screen3.png" alt="image">
             </div>
 
         </div>
@@ -431,16 +425,16 @@
             <div class="row pt-4">
                 <div class="col-md-6">
                     <h4 class="mb-3">Can I deploy my Node.js app?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
+                    <p class="light-font mb-5">Yes of course, you can build your Node.js app</p>
                     <h4 class="mb-3">Can I deploy my Angular/React/Vue app?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
+                    <p class="light-font mb-5">Yes, you can deploy any kind of frontend framwork to your server</p>
 
                 </div>
                 <div class="col-md-6">
                     <h4 class="mb-3">Can I deploy laravel app?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
+                    <p class="light-font mb-5">Yes, you can deploy laravel app, you also can run <code>php artisan migrate</code> or command you want to </p>
                     <h4 class="mb-3">Can I deploy to my custom servers?</h4>
-                    <p class="light-font mb-5">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer rutrum, urna eu pellentesque pretium, nisi nisi fermentum enim, et sagittis dolor nulla vel sapien. Vestibulum sit amet mattis ante. </p>
+                    <p class="light-font mb-5">Yes. You can add your own servers as you configure ssh access</p>
 
                 </div>
             </div>
@@ -474,7 +468,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 text-center text-lg-left">
-                    <p class="mb-2"> <span class="ti-help mr-2"></span> Open issue on github or write me mail directly</p>
+                    <p class="mb-2"> <span class="ti-help mr-2"></span>Open issue on github or write me mail directly</p>
                     <div class=" d-block d-sm-inline-block">
                         <p class="mb-2">
                             <span class="ti-email mr-2"></span> <a class="mr-4" href="mailto:shalva.gegia@gmail.com">shalva.gegia@gmail.com</a>
