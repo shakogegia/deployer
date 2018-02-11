@@ -1,6 +1,6 @@
 <template>
-  <div class="modal" :class="{'is-active': opened}">
-    <div class="modal-background"></div>
+    <div class="modal" :class="{'is-active': opened}">
+        <div class="modal-background"></div>
         <div class="modal-content">
             <div class="box">
                 <h1 class="title">Update Available</h1> <br />

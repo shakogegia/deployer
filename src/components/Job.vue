@@ -313,7 +313,7 @@ export default {
 			const log = {
 				date: new Date(),
 				result: err ? 'error' : 'success',
-				stack: null, // err
+				stack: err
 			}
 			
 			if(!this.job.logs) {
