@@ -110,4 +110,12 @@ $(function() {
         });
     }
 
+    /*-----------------------------------
+     * DOWNLOAD LINKS
+     *-----------------------------------*/
+
+    $.get("https://api.github.com/repos/shakogegia/deployer/releases", function( data ) {
+        $('#mac-download').attr("href", data[0].assets[0].browser_download_url)
+    });
+
 }); /* End Fn */
